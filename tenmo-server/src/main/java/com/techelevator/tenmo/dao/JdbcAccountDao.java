@@ -43,7 +43,7 @@ public class JdbcAccountDao implements AccountDao{
     }
 
     @Override
-    public Account get( int userId ) throws AccountNotFoundException {
+    public Account get( int userId, BigDecimal balance ) {
         Account account = null;
         String sql = "SELECT account FROM tenmo WHERE user_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
@@ -53,11 +53,36 @@ public class JdbcAccountDao implements AccountDao{
         return account;
     }
 
+    @Override
+    public Account create( Account account, int id, int userId ){
+        String sql = "INSERT into account (account_id, user_id, balance)" +
+                "VALUES (?,?,1000)";
+        jdbcTemplate.update(sql, account, id, userId);
+        return account;
+    }
+
+    @Override
+    public Account update( Account account, int id ) {
+        String sql = "UPDATE account SET balance = ? WHERE account_id = ?";
+        jdbcTemplate.update(sql, account.getBalance(), id);
+        return account;
+    }
+
+    @Override
+    public boolean delete( int id, int userId ) {
+        String sql = "DELETE FROM account WHERE account_id = ? AND user_id = ?";
+        if (id != 0){
+            jdbcTemplate.update(sql, id, userId);
+        }
+        return false;
+    }
+
     private Account mapRowToAccount(SqlRowSet result) {
         Account account = new Account();
-        account.setBalance(result.getBigDecimal("balance"));
+
         account.setId(result.getInt("account_id"));
-        account.setUserId(result.getLong("user_id"));
+        account.setUserId(result.getInt("user_id"));
+        account.setBalance(result.getBigDecimal("balance"));
         return account;
     }
 
