@@ -102,11 +102,11 @@ public class TransferService {
                 } catch (NumberFormatException e) {
                     System.out.println("Error when entering amount");
                 }
-                String output = restTemplate.exchange(BASE_URL + "transfer", HttpMethod.POST, makeTransferEntity(transfer), String.class).getBody();
+                String output = restTemplate.exchange(BASE_URL + "transfer/", HttpMethod.POST, makeTransferEntity(transfer), String.class).getBody();
                 System.out.println(output);
             }
         } catch (Exception e) {
-            System.out.println("Bad input.");
+            System.out.println("lul no, go again");
         }
     }
 
