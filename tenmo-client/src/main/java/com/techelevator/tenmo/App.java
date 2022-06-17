@@ -90,7 +90,7 @@ public class App {
         try {
             as.getBalance();
         } catch (NullPointerException e) {
-            System.out.println("No balance found");
+            System.out.println("No money");
         }
     }
 

@@ -12,7 +12,7 @@ import java.util.List;
 
 
     @RestController
-    @PreAuthorize("isValidUser()")
+    @PreAuthorize("permitAll")
     public class AccountController {
 
         @Autowired
@@ -25,6 +25,7 @@ import java.util.List;
             this.accountDao = accountDao;
             this.userDAO = userDao;
         }
+
 
         @RequestMapping(path = "balance/{id}", method = RequestMethod.GET)
         public BigDecimal getBalance( @PathVariable int id ) {

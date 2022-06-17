@@ -81,7 +81,7 @@ public class TransferService {
         Transfer transfer = new Transfer();
         try {
             Scanner scanner = new Scanner(System.in);
-            users = restTemplate.exchange(BASE_URL + "listusers", HttpMethod.GET, makeAuthEntity(), User[].class).getBody();
+            users = restTemplate.exchange(BASE_URL + "listusers/", HttpMethod.GET, makeAuthEntity(), User[].class).getBody();
             System.out.println("-------------------------------------------\r\n" +
                     "Users\r\n" +
                     "ID\t\tName\r\n" +
@@ -201,7 +201,7 @@ public class TransferService {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Something went wrong... Opps! We have all your money now!");
+            System.out.println("GET WREKD I HAVE UR MONEY");
         }
         return output;
     }
