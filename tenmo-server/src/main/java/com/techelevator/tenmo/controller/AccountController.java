@@ -1,43 +1,41 @@
 package com.techelevator.tenmo.controller;
 
 import com.techelevator.tenmo.dao.AccountDao;
-import com.techelevator.tenmo.dao.JdbcAccountDao;
-import com.techelevator.tenmo.model.Account;
-import org.springframework.http.HttpStatus;
-import org.springframework.jdbc.core.JdbcTemplate;
+import com.techelevator.tenmo.dao.UserDao;
+import com.techelevator.tenmo.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.security.auth.login.AccountNotFoundException;
-import javax.validation.Valid;
-
-@RestController
-public class AccountController {
-
-    private AccountDao dao;
-
-//    public AccountController() {this.dao = new JdbcAccountDao(new JdbcTemplate());
-//    }
+import java.math.BigDecimal;
+import java.util.List;
 
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Account getAccounts(@Valid @RequestBody Account account, @PathVariable int id) {
-        return dao.get(id, account.getBalance());
+    @RestController
+    @PreAuthorize("isValidUser()")
+    public class AccountController {
+
+        @Autowired
+        private AccountDao accountDao;
+        @Autowired
+        private UserDao userDAO;
+
+
+        public AccountController( AccountDao accountDao, UserDao userDao ) {
+            this.accountDao = accountDao;
+            this.userDAO = userDao;
+        }
+
+        @RequestMapping(path = "balance/{id}", method = RequestMethod.GET)
+        public BigDecimal getBalance( @PathVariable int id ) {
+            BigDecimal balance = accountDao.getBalance(id);
+            return balance;
+        }
+
+        @RequestMapping(path = "listusers", method = RequestMethod.GET)
+        public List<User> listUsers() {
+            List<User> users = userDAO.findAll();
+            return users;
+        }
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public Account create(@Valid @RequestBody Account account, @PathVariable int id, @PathVariable int userId) {
-        return dao.create(account, id, userId);
-    }
-
-    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-    public Account update(@Valid @RequestBody Account account, @PathVariable int id) throws AccountNotFoundException {
-        return dao.update(account, id);
-    }
-
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(path = "/{id}/{userId}", method =  RequestMethod.DELETE)
-    public void delete(@PathVariable int id, @PathVariable int userId) throws AccountNotFoundException {
-        dao.delete(id, userId);
-    }
-}
