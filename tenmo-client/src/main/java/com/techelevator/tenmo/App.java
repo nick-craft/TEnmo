@@ -88,7 +88,7 @@ public class App {
     private void viewCurrentBalance() {
         AccountService as = new AccountService(API_BASE_URL, currentUser);
         try {
-            as.getBalance();
+            as.getBalanceByUserId();
         } catch (NullPointerException e) {
             System.out.println("No money");
         }

@@ -4,94 +4,68 @@ import java.math.BigDecimal;
 
 public class Transfer {
 
-    private BigDecimal transferAmount;
-    private String typeTransfer;
-    private String statusTransfer;
-    private String fromUser;
-    private String toUser;
-    private int id;
-    private int typeId;
-    private int statusId;
-    private int fromAccount;
-    private int toAccount;
+    private int transferId;
+    private int transferTypeId;
+    private int transferStatusId;
+    private int accountFrom;
+    private int accountTo;
+    private BigDecimal amount;
+    private String userFrom;
+    private String userTo;
 
-    public BigDecimal getTransferAmount() {
-        return transferAmount;
+    public String getUserFrom() {
+        return userFrom;
+    }
+    public void setUserFrom(String userFrom) {
+        this.userFrom = userFrom;
+    }
+    public String getUserTo() {
+        return userTo;
+    }
+    public void setUserTo(String userTo) {
+        this.userTo = userTo;
+    }
+    public int getTransferId() {
+        return transferId;
     }
 
-    public void setTransferAmount( BigDecimal transferAmount ) {
-        this.transferAmount = transferAmount;
+    public void setTransferId( int transferId ) {
+        this.transferId = transferId;
     }
 
-    public String getTypeTransfer() {
-        return typeTransfer;
+    public int getTransferStatusId() {
+        return transferStatusId;
     }
 
-    public void setTypeTransfer( String typeTransfer ) {
-        this.typeTransfer = typeTransfer;
+    public void setTransferStatusId( int transferStatusId ) {
+        this.transferStatusId = transferStatusId;
     }
 
-    public String getStatusTransfer() {
-        return statusTransfer;
+    public int getTransferTypeId() {
+        return transferTypeId;
     }
 
-    public void setStatusTransfer( String statusTransfer ) {
-        this.statusTransfer = statusTransfer;
+    public void setTransferTypeId( int transferTypeId ) {
+        this.transferTypeId = transferTypeId;
     }
 
-    public String getFromUser() {
-        return fromUser;
+    public int getAccountFrom() {
+        return accountFrom;
+    }
+    public void setAccountFrom(int accountFrom) {
+        this.accountFrom = accountFrom;
+    }
+    public int getAccountTo() {
+        return accountTo;
+    }
+    public void setAccountTo(int accountTo) {
+        this.accountTo = accountTo;
+    }
+    public BigDecimal getAmount() {
+        return amount;
+    }
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
-    public void setFromUser( String fromUser ) {
-        this.fromUser = fromUser;
-    }
-
-    public String getToUser() {
-        return toUser;
-    }
-
-    public void setToUser( String toUser ) {
-        this.toUser = toUser;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId( int id ) {
-        this.id = id;
-    }
-
-    public int getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId( int typeId ) {
-        this.typeId = typeId;
-    }
-
-    public int getStatusId() {
-        return statusId;
-    }
-
-    public void setStatusId( int statusId ) {
-        this.statusId = statusId;
-    }
-
-    public int getFromAccount() {
-        return fromAccount;
-    }
-
-    public void setFromAccount( int fromAccount ) {
-        this.fromAccount = fromAccount;
-    }
-
-    public int getToAccount() {
-        return toAccount;
-    }
-
-    public void setToAccount( int toAccount ) {
-        this.toAccount = toAccount;
-    }
 }

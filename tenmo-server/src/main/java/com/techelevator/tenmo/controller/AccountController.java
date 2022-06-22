@@ -12,13 +12,14 @@ import java.util.List;
 
 
     @RestController
+//    @CrossOrigin(origins = "localhost:8080")
     @PreAuthorize("permitAll")
     public class AccountController {
 
         @Autowired
-        private AccountDao accountDao;
+        private final AccountDao accountDao;
         @Autowired
-        private UserDao userDAO;
+        private final UserDao userDAO;
 
 
         public AccountController( AccountDao accountDao, UserDao userDao ) {
@@ -29,14 +30,12 @@ import java.util.List;
 
         @RequestMapping(path = "balance/{id}", method = RequestMethod.GET)
         public BigDecimal getBalance( @PathVariable int id ) {
-            BigDecimal balance = accountDao.getBalance(id);
-            return balance;
+            return accountDao.getBalance(id);
         }
 
         @RequestMapping(path = "listusers", method = RequestMethod.GET)
         public List<User> listUsers() {
-            List<User> users = userDAO.findAll();
-            return users;
+            return userDAO.findAll();
         }
     }
 

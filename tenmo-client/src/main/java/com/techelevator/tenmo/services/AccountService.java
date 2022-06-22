@@ -22,17 +22,14 @@ public class AccountService {
         BASE_URL = url;
     }
 
-    public AccountService( String apiBaseUrl ) {
-    }
-
-    public BigDecimal getBalance() {
+    public BigDecimal getBalanceByUserId() {
         BigDecimal balance = null;
         try {
             ResponseEntity<BigDecimal> response = restTemplate.exchange(BASE_URL + "balance/" + currentUser.getUser().getId(), HttpMethod.GET, makeAuthEntity(), BigDecimal.class);
             balance = response.getBody();
             System.out.println("You have: $" + balance);
         } catch (RestClientException e) {
-            System.out.println("Lul no money");
+            System.out.println("Could not complete request");
         }
         return balance;
     }
